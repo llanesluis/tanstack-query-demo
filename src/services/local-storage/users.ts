@@ -1,8 +1,8 @@
 import { User } from "../../types/user";
-import { sleep } from "../../utils/sleep";
+import sleepLocalStorage, { DELAY_KEY_LS } from "./sleepLS";
 
 export async function getAllUsers({ filter = "" }: { filter: string }) {
-  await sleep(300);
+  await sleepLocalStorage(DELAY_KEY_LS);
 
   const users = JSON.parse(localStorage.getItem("users") || "[]") as User[];
 
@@ -23,7 +23,7 @@ export async function createUser({
   name: string;
   email: string;
 }) {
-  await sleep(300);
+  await sleepLocalStorage(DELAY_KEY_LS);
 
   const users = JSON.parse(localStorage.getItem("users") || "[]") as User[];
 
@@ -42,7 +42,7 @@ export async function createUser({
 }
 
 export async function deleteUser({ userId }: { userId: string }) {
-  await sleep(300);
+  await sleepLocalStorage(DELAY_KEY_LS);
 
   const users = JSON.parse(localStorage.getItem("users") || "[]") as User[];
 
@@ -67,7 +67,7 @@ export async function updateUser({
   name: string;
   email: string;
 }) {
-  await sleep(300);
+  await sleepLocalStorage(DELAY_KEY_LS);
 
   const users = JSON.parse(localStorage.getItem("users") || "[]") as User[];
 

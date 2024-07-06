@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { Button } from "../ui/button";
-import Users from "./users";
-import Search from "../search";
-import { users } from "../../mock/users";
 import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import { users } from "../../mock/users";
+import DelaySlider from "../delay-slider";
+import Search from "../search";
+import { Button } from "../ui/button";
 import CreateUser from "./create-user";
+import Users from "./users";
 
 export default function DemoReactQueryMutationLS() {
   const [isQueryEnabled, setIsQueryEnabled] = useState(true);
@@ -27,10 +28,11 @@ export default function DemoReactQueryMutationLS() {
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-4">
       <h2 className="mb-4 text-2xl font-bold max-md:text-xl">
         Demo: useQuery & useMutation (local storage)
       </h2>
+
       <div className="flex flex-wrap gap-4">
         <Button
           variant="secondary"
@@ -55,6 +57,7 @@ export default function DemoReactQueryMutationLS() {
         >
           {isQueryEnabled ? "Disable " : "Enable "}query
         </Button>
+        <DelaySlider className="w-full" />
       </div>
 
       <Search setFilter={setFilter} filter={filter} />
