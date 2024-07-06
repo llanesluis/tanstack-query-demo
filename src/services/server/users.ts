@@ -1,17 +1,15 @@
-import { BASE_URL } from '../config';
-
-// API de prueba 07-auth... midudev
+const BASE_URL = "http://localhost:3000/";
 
 export async function getAllUsers() {
   const res = await fetch(`${BASE_URL}users`);
-  if (!res.ok) throw new Error('Bad response');
+  if (!res.ok) throw new Error("Bad response");
 
   return res.json();
 }
 
 export async function getUserByUsername(username: string) {
   const res = await fetch(`${BASE_URL}users/${username}`);
-  if (!res.ok) throw new Error('Bad response');
+  if (!res.ok) throw new Error("Bad response");
 
   return res.json();
 }
@@ -30,13 +28,13 @@ export async function createUser(input: {
   };
 
   const res = await fetch(`${BASE_URL}users`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(body),
   });
-  if (!res.ok) throw new Error('Bad response');
+  if (!res.ok) throw new Error("Bad response");
 
   return res.json();
 }
