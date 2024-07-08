@@ -13,7 +13,7 @@ import {
 import { Input } from "../ui/input";
 import { Edit, Loader } from "lucide-react";
 import { cn } from "../../lib/utils";
-import useUpdateUser from "../../hooks/mutations/useUpdateUser";
+import useUpdateUserOptimistic from "../../hooks/mutations/useUpdateUserOptimistic";
 
 export default function UpdateUserButton({
   id,
@@ -25,7 +25,7 @@ export default function UpdateUserButton({
   email: string;
 }) {
   const formRef = useRef<HTMLFormElement>(null);
-  const { mutateAsync: updateUser, isPending } = useUpdateUser();
+  const { mutateAsync: updateUser, isPending } = useUpdateUserOptimistic();
 
   const handleAddUser = async () => {
     const form = formRef.current;

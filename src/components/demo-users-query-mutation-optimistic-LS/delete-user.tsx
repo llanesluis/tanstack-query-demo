@@ -1,9 +1,13 @@
 import { Trash2 } from "lucide-react";
-import useDeleteUser from "../../hooks/mutations/useDeleteUser";
 import { cn } from "../../lib/utils";
+import useDeleteUserOptimistic from "../../hooks/mutations/useDeleteUserOptimistic";
 
 export default function DeleteUserButton({ id }: { id: string }) {
-  const { mutate: deleteUser, isPending, variables } = useDeleteUser();
+  const {
+    mutate: deleteUser,
+    isPending,
+    variables,
+  } = useDeleteUserOptimistic();
 
   return (
     <button
