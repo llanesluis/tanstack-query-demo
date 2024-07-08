@@ -15,15 +15,15 @@ export default function Users({ filter, enabled }: UsersProps) {
   } = useUsers({ filter, enabled });
 
   if (isError) {
-    return (
-      <p className="m-auto text-red-500">Error, could not fetch data...</p>
-    );
+    return <p className="m-auto text-sm text-red-500">An error ocurred...</p>;
   }
 
   if (isPending) return <UsersSkeleton />;
 
   if (users.length <= 0) {
-    return <p className="m-auto text-blue-500">No users found...</p>;
+    return (
+      <p className="m-auto text-sm text-muted-foreground">No users found...</p>
+    );
   }
 
   return (
