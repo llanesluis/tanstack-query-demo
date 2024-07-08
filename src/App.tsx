@@ -1,7 +1,8 @@
 import Container from "./components/container";
-import DemoReactQueryMutationLS from "./components/demo-users-query-mutation-LS/demo-react-query-mutation-LS";
+import DemoReactQueryMutationOptimisticLS from "./components/demo-users-query-mutation-optimistic-LS/demo-react-query-mutation-optimistic-LS";
 import GlobalFetchingIndicator from "./components/global-fetching-indicator";
 import GlobalMutatingIndicator from "./components/global-mutating-indicator";
+import FilterProvider from "./hooks/context/filter-provider";
 
 function App() {
   return (
@@ -11,8 +12,9 @@ function App() {
       <GlobalFetchingIndicator />
       <GlobalMutatingIndicator />
 
-      {/* <DemoReactQuery /> */}
-      <DemoReactQueryMutationLS />
+      <FilterProvider>
+        <DemoReactQueryMutationOptimisticLS />
+      </FilterProvider>
     </Container>
   );
 }
