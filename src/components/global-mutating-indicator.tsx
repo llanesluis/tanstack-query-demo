@@ -8,7 +8,7 @@ export default function GlobalMutatingIndicator() {
   return (
     <div
       className={cn(
-        "pointer-events-none fixed inset-x-0 top-16 flex justify-center gap-2 bg-gradient-to-r from-transparent via-blue-600/20 to-transparent transition",
+        "pointer-events-none fixed inset-x-0 top-[88px] flex justify-center gap-2 bg-gradient-to-r from-transparent via-blue-600/20 to-transparent transition",
         !!isMutating === true ? "opacity-100" : "opacity-0",
       )}
     >

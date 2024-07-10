@@ -8,7 +8,7 @@ export default function GlobalFetchingIndicator() {
   return (
     <div
       className={cn(
-        "pointer-events-none fixed inset-x-0 top-10 flex justify-center gap-2 bg-gradient-to-r from-transparent via-red-600/20 to-transparent transition",
+        "pointer-events-none fixed inset-x-0 top-16 z-50 flex justify-center gap-2 bg-gradient-to-r from-transparent via-red-600/20 to-transparent transition",
         !!isFetching === true ? "opacity-100" : "opacity-0",
       )}
     >
