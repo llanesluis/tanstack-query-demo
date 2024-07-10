@@ -1,20 +1,11 @@
-import { useEffect, useState } from "react";
+import useDelayLS from "../hooks/useDelayLS";
 import { cn } from "../lib/utils";
 import { Slider } from "./ui/slider";
-import { DELAY_KEY_LS } from "../services/local-storage/sleepLS";
 
 type SliderProps = React.ComponentProps<typeof Slider>;
 
-const initialDelay = Number(
-  JSON.parse(localStorage.getItem(DELAY_KEY_LS) || "0"),
-);
-
 export default function DelaySlider({ className, ...props }: SliderProps) {
-  const [delay, setDelay] = useState(initialDelay);
-
-  useEffect(() => {
-    localStorage.setItem(DELAY_KEY_LS, JSON.stringify(delay));
-  }, [delay]);
+  const { delay, setDelay } = useDelayLS();
 
   const handleValueChannge = (value: number[]) => setDelay(value[0]);
 
