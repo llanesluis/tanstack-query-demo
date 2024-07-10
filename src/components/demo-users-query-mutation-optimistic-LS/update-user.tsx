@@ -25,7 +25,7 @@ export default function UpdateUserButton({
   email: string;
 }) {
   const formRef = useRef<HTMLFormElement>(null);
-  const { mutateAsync: updateUser, isPending } = useUpdateUserOptimistic();
+  const { mutate: updateUser, isPending } = useUpdateUserOptimistic();
 
   const handleAddUser = async () => {
     const form = formRef.current;
@@ -37,8 +37,7 @@ export default function UpdateUserButton({
 
     if (!name || !email) return;
 
-    console.log({ name, email });
-    await updateUser({ userId: id, name, email });
+    updateUser({ userId: id, name, email });
   };
 
   return (
