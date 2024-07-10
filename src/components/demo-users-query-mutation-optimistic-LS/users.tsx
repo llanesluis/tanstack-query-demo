@@ -32,9 +32,9 @@ export default function Users({ filter, enabled }: UsersProps) {
   // - the queryFn is running but data is not available yet
   if (isPending)
     return (
-      <span className="m-auto text-sm text-muted-foreground">
+      <p className="m-auto text-sm text-muted-foreground">
         Waiting to be enabled to start fetching...
-      </span>
+      </p>
     );
 
   if (users.length <= 0) {

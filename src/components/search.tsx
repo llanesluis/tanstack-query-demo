@@ -56,7 +56,7 @@ export default function Search({ setFilter, filter }: SearchProps) {
       <span
         className={cn(
           "text-sm text-muted-foreground",
-          filter ? "opacity-100" : "0",
+          filter ? "opacity-100" : "opacity-0",
         )}
       >
         Filtering by: <strong>{filter}</strong>
