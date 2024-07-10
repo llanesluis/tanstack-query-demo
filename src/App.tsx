@@ -7,6 +7,7 @@ import FilterProvider from "./hooks/context/filter-provider";
 import DemoReactQuery from "./components/demo-users-query/demo-react-query";
 import DemoReactQueryMutationOptimisticLS from "./components/demo-users-query-mutation-optimistic-LS/demo-react-query-mutation-optimistic-LS";
 import DemoReactQueryMutationLS from "./components/demo-users-query-mutation-LS/demo-react-query-mutation-LS";
+import Footer from "./components/footer";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <GlobalFetchingIndicator />
         <GlobalMutatingIndicator />
       </Container>
+      <Footer />
     </>
   );
 }
