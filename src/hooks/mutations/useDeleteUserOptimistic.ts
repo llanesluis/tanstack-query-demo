@@ -12,8 +12,9 @@ export default function useDeleteUserOptimistic() {
   return useMutation({
     mutationFn: deleteUser,
     onMutate: async (variables) => {
-      // exact: false -> cancel all query keys that PARTIALLY match the queryKey
-      await queryClient.cancelQueries({ queryKey: ["users"], exact: false });
+      // exact: false -> cancel all query keys that PARTIALLY match the queryKey (default)
+      // exact: true -> cancel all query keys that EXACTLY match the queryKey
+      await queryClient.cancelQueries({ queryKey: ["users"] });
 
       const prevUsers =
         queryClient.getQueryData<User[]>(["users", filter]) ?? [];
@@ -40,7 +41,6 @@ export default function useDeleteUserOptimistic() {
     onSettled: () => {
       queryClient.invalidateQueries({
         queryKey: ["users"],
-        exact: false,
       });
     },
   });

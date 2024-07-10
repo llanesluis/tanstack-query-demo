@@ -14,8 +14,7 @@ export default function useCreateUserOptimistic() {
   return useMutation({
     mutationFn: createUser,
     onMutate: async (variables) => {
-      // exact: false -> cancel all query keys that PARTIALLY match the queryKey
-      await queryClient.cancelQueries({ queryKey: ["users"], exact: false });
+      await queryClient.cancelQueries({ queryKey: ["users"] });
 
       const prevUsers =
         queryClient.getQueryData<User[]>(["users", filter]) ?? [];
@@ -46,7 +45,6 @@ export default function useCreateUserOptimistic() {
     onSettled: () => {
       queryClient.invalidateQueries({
         queryKey: ["users"],
-        exact: false,
       });
     },
   });
