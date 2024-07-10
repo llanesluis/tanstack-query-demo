@@ -2,7 +2,7 @@ import { Route } from "wouter";
 import Container from "./components/container";
 import GlobalFetchingIndicator from "./components/global-fetching-indicator";
 import GlobalMutatingIndicator from "./components/global-mutating-indicator";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbar";
 import FilterProvider from "./hooks/context/filter-provider";
 import DemoReactQuery from "./components/demo-users-query/demo-react-query";
 import DemoReactQueryMutationOptimisticLS from "./components/demo-users-query-mutation-optimistic-LS/demo-react-query-mutation-optimistic-LS";
