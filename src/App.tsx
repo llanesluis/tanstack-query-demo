@@ -11,7 +11,7 @@ import Footer from "./components/footer";
 
 export default function App() {
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <Navbar />
       <Container>
         <Router />
@@ -19,7 +19,7 @@ export default function App() {
         <GlobalMutatingIndicator />
       </Container>
       <Footer />
-    </>
+    </div>
   );
 }
 

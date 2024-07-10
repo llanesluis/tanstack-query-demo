@@ -5,7 +5,7 @@ import { PanelLeft } from "lucide-react";
 
 export default function Navbar() {
   return (
-    <div className="sticky border-b-2 bg-neutral-900 py-4">
+    <div className="sticky inset-x-0 top-0 z-10 border-b-2 bg-neutral-900 py-4">
       <div className="container flex items-center justify-between gap-4">
         <MobileNavbar />
         <Link
