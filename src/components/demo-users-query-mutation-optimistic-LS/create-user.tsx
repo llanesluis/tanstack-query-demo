@@ -28,10 +28,12 @@ export default function CreateUser() {
 
     if (!name || !email) return;
 
-    console.log({ name, email });
-    await createUser({ name, email });
-
-    form?.reset();
+    try {
+      await createUser({ name, email });
+      form?.reset();
+    } catch (error) {
+      console.log("An error ocurred while creating the user");
+    }
   };
 
   return (
