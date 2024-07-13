@@ -14,7 +14,7 @@ export default function useCreateUser() {
       toast.error("Could not create new user: " + error.message);
     },
     onSettled: () => {
-      queryClient.invalidateQueries({
+      return queryClient.invalidateQueries({
         queryKey: ["users"],
       });
     },

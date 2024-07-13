@@ -3,13 +3,10 @@ import { cn } from "../../lib/utils";
 import useDeleteUser from "../../hooks/mutations/useDeleteUser";
 
 export default function DeleteUserButton({ id }: { id: string }) {
-  const { mutate: deleteUser, isPending, variables } = useDeleteUser();
+  const { mutate: deleteUser, isPending } = useDeleteUser();
   return (
     <button
-      className={cn(
-        "absolute bottom-4 right-4",
-        isPending || variables?.userId === id ? "opacity-50" : "",
-      )}
+      className={cn("absolute bottom-4 right-4", isPending ? "opacity-50" : "")}
       onClick={() => deleteUser({ userId: id })}
       disabled={isPending}
     >

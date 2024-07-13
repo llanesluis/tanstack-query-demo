@@ -14,7 +14,7 @@ export default function useDeleteUser() {
       toast.error("Could not delete user: " + error.message);
     },
     onSettled: () => {
-      queryClient.invalidateQueries({
+      return queryClient.invalidateQueries({
         queryKey: ["users"],
       });
     },

@@ -23,7 +23,7 @@ export default function useUpdateUser() {
       toast.error("Could not update user: " + error.message);
     },
     onSettled: () => {
-      queryClient.invalidateQueries({
+      return queryClient.invalidateQueries({
         queryKey: ["users"],
       });
     },
