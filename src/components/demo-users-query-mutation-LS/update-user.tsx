@@ -48,6 +48,7 @@ export default function UpdateUserButton({
             "absolute bottom-10 right-4",
             isPending ? "opacity-50" : "",
           )}
+          disabled={isPending}
         >
           <Edit className="size-4 text-blue-500 hover:text-blue-700" />
         </button>

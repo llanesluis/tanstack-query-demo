@@ -3,18 +3,11 @@ import { cn } from "../../lib/utils";
 import useDeleteUserOptimistic from "../../hooks/mutations/useDeleteUserOptimistic";
 
 export default function DeleteUserButton({ id }: { id: string }) {
-  const {
-    mutate: deleteUser,
-    isPending,
-    variables,
-  } = useDeleteUserOptimistic();
+  const { mutate: deleteUser, isPending } = useDeleteUserOptimistic();
 
   return (
     <button
-      className={cn(
-        "absolute bottom-4 right-4",
-        isPending || variables?.userId === id ? "opacity-50" : "",
-      )}
+      className={cn("absolute bottom-4 right-4", isPending ? "opacity-50" : "")}
       onClick={() => deleteUser({ userId: id })}
       disabled={isPending}
     >
