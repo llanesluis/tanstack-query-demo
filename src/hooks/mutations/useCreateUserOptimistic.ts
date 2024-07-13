@@ -2,14 +2,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { createUser } from "../../services/local-storage/users";
 import { User } from "../../types/user";
-import { useFilter } from "../useFilter";
+import { useFilterContext } from "../useFilterContext";
 
 export default function useCreateUserOptimistic() {
   const queryClient = useQueryClient();
 
   // Gets the filter from a context to make sure
   // we get/set the correct data from/to the query cache
-  const { filter } = useFilter();
+  const { filter } = useFilterContext();
 
   return useMutation({
     mutationFn: createUser,

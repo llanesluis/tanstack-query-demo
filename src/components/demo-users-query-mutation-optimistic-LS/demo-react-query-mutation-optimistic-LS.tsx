@@ -6,12 +6,12 @@ import Search from "../search";
 import { Button } from "../ui/button";
 import CreateUser from "./create-user";
 import Users from "./users";
-import { useFilter } from "../../hooks/useFilter";
+import { useFilterContext } from "../../hooks/useFilterContext";
 
 export default function DemoReactQueryMutationOptimisticLS() {
   const [isQueryEnabled, setIsQueryEnabled] = useState(true);
 
-  const { filter, setFilter } = useFilter();
+  const { filter, setFilter } = useFilterContext();
 
   const queryClient = useQueryClient();
 

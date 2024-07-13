@@ -2,12 +2,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { deleteUser } from "../../services/local-storage/users";
 import { User } from "../../types/user";
-import { useFilter } from "../useFilter";
+import { useFilterContext } from "../useFilterContext";
 
 export default function useDeleteUserOptimistic() {
   const queryClient = useQueryClient();
 
-  const { filter } = useFilter();
+  const { filter } = useFilterContext();
 
   return useMutation({
     mutationFn: deleteUser,
