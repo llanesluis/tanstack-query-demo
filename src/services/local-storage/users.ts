@@ -1,7 +1,11 @@
 import { User } from "../../types/user";
 import sleepLocalStorage, { DELAY_KEY_LS } from "./sleepLS";
 
-export async function getAllUsers({ filter = "" }: { filter: string }) {
+export async function getAllUsers({
+  filter = "",
+}: {
+  filter: string;
+}): Promise<User[]> {
   await sleepLocalStorage(DELAY_KEY_LS);
 
   const users = JSON.parse(localStorage.getItem("users") || "[]") as User[];
@@ -22,7 +26,7 @@ export async function createUser({
 }: {
   name: string;
   email: string;
-}) {
+}): Promise<User> {
   await sleepLocalStorage(DELAY_KEY_LS);
 
   const users = JSON.parse(localStorage.getItem("users") || "[]") as User[];
@@ -41,7 +45,11 @@ export async function createUser({
   return newUser;
 }
 
-export async function deleteUser({ userId }: { userId: string }) {
+export async function deleteUser({
+  userId,
+}: {
+  userId: string;
+}): Promise<User> {
   await sleepLocalStorage(DELAY_KEY_LS);
 
   const users = JSON.parse(localStorage.getItem("users") || "[]") as User[];
@@ -66,7 +74,7 @@ export async function updateUser({
   userId: string;
   name: string;
   email: string;
-}) {
+}): Promise<User> {
   await sleepLocalStorage(DELAY_KEY_LS);
 
   const users = JSON.parse(localStorage.getItem("users") || "[]") as User[];
@@ -74,7 +82,7 @@ export async function updateUser({
   const userToUpdate = users.find((user) => user.id === userId);
   if (!userToUpdate) throw new Error("User not found");
 
-  const updatedUser = {
+  const updatedUser: User = {
     ...userToUpdate,
     name,
     email,
