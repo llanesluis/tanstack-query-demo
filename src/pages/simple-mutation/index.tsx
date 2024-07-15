@@ -1,12 +1,13 @@
-import { useState } from "react";
-import { Button } from "../ui/button";
-import Users from "./users";
-import Search from "../search";
 import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import { users } from "../../mock/users";
-import DelaySlider from "../delay-slider";
+import DelaySlider from "../../components/delay-slider";
+import Search from "../../components/search";
+import { Button } from "../../components/ui/button";
+import CreateUser from "./components/create-user";
+import Users from "./components/users";
 
-export default function DemoReactQuery() {
+export default function SimpleMutationLS() {
   const [isQueryEnabled, setIsQueryEnabled] = useState(true);
   const [filter, setFilter] = useState("");
 
@@ -29,7 +30,7 @@ export default function DemoReactQuery() {
   return (
     <div className="flex flex-col gap-4">
       <h2 className="mb-4 text-2xl font-bold max-md:text-xl">
-        Demo: useQuery (local storage)
+        Demo: useQuery & useMutation (local storage)
       </h2>
 
       <div className="flex flex-wrap gap-4">
@@ -60,6 +61,8 @@ export default function DemoReactQuery() {
       </div>
 
       <Search setFilter={setFilter} filter={filter} />
+
+      <CreateUser />
 
       <Users filter={filter} enabled={isQueryEnabled} />
     </div>

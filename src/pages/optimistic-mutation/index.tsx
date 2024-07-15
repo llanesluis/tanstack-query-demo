@@ -1,14 +1,14 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { users } from "../../mock/users";
-import DelaySlider from "../delay-slider";
-import Search from "../search";
-import { Button } from "../ui/button";
-import CreateUser from "./create-user";
-import Users from "./users";
+import CreateUser from "./components/create-user";
+import Users from "./components/users";
 import { useFilterContext } from "../../hooks/useFilterContext";
+import Search from "../../components/search";
+import DelaySlider from "../../components/delay-slider";
+import { Button } from "../../components/ui/button";
 
-export default function DemoReactQueryMutationOptimisticLS() {
+export default function OptimisticMutationLS() {
   const [isQueryEnabled, setIsQueryEnabled] = useState(true);
 
   const { filter, setFilter } = useFilterContext();

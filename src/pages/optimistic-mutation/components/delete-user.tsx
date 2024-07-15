@@ -1,9 +1,10 @@
 import { Trash2 } from "lucide-react";
-import { cn } from "../../lib/utils";
-import useDeleteUser from "../../hooks/mutations/useDeleteUser";
+import { cn } from "../../../lib/utils";
+import useDeleteUserOptimistic from "../mutations/useDeleteUserOptimistic";
 
 export default function DeleteUserButton({ id }: { id: string }) {
-  const { mutate: deleteUser, isPending } = useDeleteUser();
+  const { mutate: deleteUser, isPending } = useDeleteUserOptimistic();
+
   return (
     <button
       className={cn("absolute bottom-4 right-4", isPending ? "opacity-50" : "")}

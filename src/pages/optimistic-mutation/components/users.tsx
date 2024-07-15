@@ -1,6 +1,6 @@
-import useUsers from "../../hooks/queries/useUsers";
-import { cn } from "../../lib/utils";
-import { type User } from "../../types/user";
+import useUsers from "../../../hooks/queries/useUsers";
+import { cn } from "../../../lib/utils";
+import { type User } from "../../../types/user";
 import DeleteUserButton from "./delete-user";
 import UpdateUserButton from "./update-user";
 
@@ -15,13 +15,27 @@ export default function Users({ filter, enabled }: UsersProps) {
     isPending,
     isError,
     isPlaceholderData,
+    isLoading,
   } = useUsers({ filter, enabled });
 
   if (isError) {
     return <p className="m-auto text-sm text-red-500">An error ocurred...</p>;
   }
 
-  if (isPending) return <UsersSkeleton />;
+  // Only shows the very first time the queryFn is triggered
+  // - the queryFn is running AND there is no data in cache
+  if (isLoading) return <UsersSkeleton />;
+
+  // Shows while the queryFn doesn't have any cached data
+  // - queries start with this state
+  // - the queryFn has not been triggered yet
+  // - the queryFn is running but data is not available yet
+  if (isPending)
+    return (
+      <p className="m-auto text-sm text-muted-foreground">
+        Waiting to be enabled to start fetching...
+      </p>
+    );
 
   if (users.length <= 0) {
     return (

@@ -1,5 +1,6 @@
 import { useRef } from "react";
-import { Button } from "../ui/button";
+import useCreateUser from "../mutations/useCreateUser";
+import { Button } from "../../../components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -9,14 +10,13 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
-import { Input } from "../ui/input";
+} from "../../../components/ui/dialog";
+import { Input } from "../../../components/ui/input";
 import { Loader } from "lucide-react";
-import useCreateUserOptimistic from "../../hooks/mutations/useCreateUserOptimistic";
 
 export default function CreateUser() {
   const formRef = useRef<HTMLFormElement>(null);
-  const { mutateAsync: createUser, isPending } = useCreateUserOptimistic();
+  const { mutateAsync: createUser, isPending } = useCreateUser();
 
   const handleAddUser = async () => {
     const form = formRef.current;

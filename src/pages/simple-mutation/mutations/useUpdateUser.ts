@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { updateUser } from "../../services/local-storage/users";
-import { User } from "../../types/user";
+import { updateUser } from "../../../services/local-storage/users";
+import { User } from "../../../types/user";
 
 export default function useUpdateUser() {
   const queryClient = useQueryClient();

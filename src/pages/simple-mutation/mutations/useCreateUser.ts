@@ -1,17 +1,17 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { deleteUser } from "../../services/local-storage/users";
+import { createUser } from "../../../services/local-storage/users";
 
-export default function useDeleteUser() {
+export default function useCreateUser() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: deleteUser,
+    mutationFn: createUser,
     onSuccess: (data) => {
-      toast.success("User deleted: " + data.name);
+      toast.success("New user created: " + data.name);
     },
     onError: (error) => {
-      toast.error("Could not delete user: " + error.message);
+      toast.error("Could not create new user: " + error.message);
     },
     onSettled: () => {
       return queryClient.invalidateQueries({

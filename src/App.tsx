@@ -4,10 +4,10 @@ import GlobalFetchingIndicator from "./components/global-fetching-indicator";
 import GlobalMutatingIndicator from "./components/global-mutating-indicator";
 import Navbar from "./components/navbar";
 import FilterProvider from "./hooks/context/filter-provider";
-import DemoReactQuery from "./components/demo-users-query/demo-react-query";
-import DemoReactQueryMutationOptimisticLS from "./components/demo-users-query-mutation-optimistic-LS/demo-react-query-mutation-optimistic-LS";
-import DemoReactQueryMutationLS from "./components/demo-users-query-mutation-LS/demo-react-query-mutation-LS";
 import Footer from "./components/footer";
+import SimpleQueryLS from "./pages/simple-query";
+import SimpleMutationLS from "./pages/simple-mutation";
+import OptimisticMutationLS from "./pages/optimistic-mutation";
 
 export default function App() {
   return (
@@ -29,11 +29,11 @@ function Router() {
       <Route path="/">
         <h1>Tanstack Query v5 demo</h1>
       </Route>
-      <Route path={"/query"} component={DemoReactQuery} />
-      <Route path={"/mutation"} component={DemoReactQueryMutationLS} />
+      <Route path={"/query"} component={SimpleQueryLS} />
+      <Route path={"/mutation"} component={SimpleMutationLS} />
       <Route path={"/optimistic-mutation"}>
         <FilterProvider>
-          <DemoReactQueryMutationOptimisticLS />
+          <OptimisticMutationLS />
         </FilterProvider>
       </Route>
     </>

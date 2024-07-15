@@ -1,6 +1,5 @@
 import { useRef } from "react";
-import useCreateUser from "../../hooks/mutations/useCreateUser";
-import { Button } from "../ui/button";
+import { Button } from "../../../components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -10,13 +9,23 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
-import { Input } from "../ui/input";
-import { Loader } from "lucide-react";
+} from "../../../components/ui/dialog";
+import { Input } from "../../../components/ui/input";
+import { Edit, Loader } from "lucide-react";
+import { cn } from "../../../lib/utils";
+import useUpdateUserOptimistic from "../mutations/useUpdateUserOptimistic";
 
-export default function CreateUser() {
+export default function UpdateUserButton({
+  id,
+  name,
+  email,
+}: {
+  id: string;
+  name: string;
+  email: string;
+}) {
   const formRef = useRef<HTMLFormElement>(null);
-  const { mutateAsync: createUser, isPending } = useCreateUser();
+  const { mutate: updateUser, isPending } = useUpdateUserOptimistic();
 
   const handleAddUser = async () => {
     const form = formRef.current;
@@ -28,47 +37,50 @@ export default function CreateUser() {
 
     if (!name || !email) return;
 
-    try {
-      await createUser({ name, email });
-      form?.reset();
-    } catch (error) {
-      console.log("An error ocurred while creating the user");
-    }
+    updateUser({ userId: id, name, email });
   };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={"secondary"} className="w-fit">
-          Create user
-        </Button>
+        <button
+          className={cn(
+            "absolute bottom-10 right-4",
+            isPending ? "opacity-50" : "",
+          )}
+          disabled={isPending}
+        >
+          <Edit className="size-4 text-blue-500 hover:text-blue-700" />
+        </button>
       </DialogTrigger>
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create a new user</DialogTitle>
+          <DialogTitle>Edit user: {name}</DialogTitle>
           <DialogDescription>
-            This will create a new user that will be persisted to the local
+            This will update the new user and will be persisted to the local
             storage.
           </DialogDescription>
         </DialogHeader>
 
         <form ref={formRef} className="my-2 space-y-4">
           <div className="flex flex-col gap-2">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">New name</label>
             <Input
               type="text"
               name="name"
+              defaultValue={name}
               className="w-full"
               disabled={isPending}
             />
           </div>
 
           <div className="flex flex-col gap-2">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">New email</label>
             <Input
               type="email"
               name="email"
+              defaultValue={email}
               className="w-full"
               disabled={isPending}
             />

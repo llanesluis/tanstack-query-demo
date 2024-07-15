@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../../../components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -9,11 +9,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
-import { Input } from "../ui/input";
+} from "../../../components/ui/dialog";
+import { Input } from "../../../components/ui/input";
 import { Edit, Loader } from "lucide-react";
-import { cn } from "../../lib/utils";
-import useUpdateUserOptimistic from "../../hooks/mutations/useUpdateUserOptimistic";
+import { cn } from "../../../lib/utils";
+import useUpdateUser from "../mutations/useUpdateUser";
 
 export default function UpdateUserButton({
   id,
@@ -25,7 +25,7 @@ export default function UpdateUserButton({
   email: string;
 }) {
   const formRef = useRef<HTMLFormElement>(null);
-  const { mutate: updateUser, isPending } = useUpdateUserOptimistic();
+  const { mutate: updateUser, isPending } = useUpdateUser();
 
   const handleAddUser = async () => {
     const form = formRef.current;

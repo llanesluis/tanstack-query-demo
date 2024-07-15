@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { updateUser } from "../../services/local-storage/users";
-import { User } from "../../types/user";
-import { useFilterContext } from "../useFilterContext";
+import { useFilterContext } from "../../../hooks/useFilterContext";
+import { updateUser } from "../../../services/local-storage/users";
+import { User } from "../../../types/user";
 
 export default function useUpdateUserOptimistic() {
   const queryClient = useQueryClient();
