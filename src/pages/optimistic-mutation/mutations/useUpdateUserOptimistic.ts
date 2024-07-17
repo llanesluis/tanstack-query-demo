@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { useFilterContext } from "../../../hooks/useFilterContext";
 import { updateUser } from "../../../services/local-storage/users";
 import { User } from "../../../types/user";
+import { usersKeys, usersOptions } from "../../../hooks/queries/useUsers";
 
 export default function useUpdateUserOptimistic() {
   const queryClient = useQueryClient();
@@ -12,13 +13,14 @@ export default function useUpdateUserOptimistic() {
   return useMutation({
     mutationFn: updateUser,
     onMutate: async (variables) => {
-      await queryClient.cancelQueries({ queryKey: ["users"] });
+      await queryClient.cancelQueries({ queryKey: usersKeys.all });
 
       const prevUsers =
-        queryClient.getQueryData<User[]>(["users", filter]) ?? [];
+        queryClient.getQueryData(usersOptions({ filter }).queryKey) ?? [];
+
       const prevUser = prevUsers.find((user) => user.id === variables.userId);
 
-      const updatedUser = {
+      const updatedUser: User = {
         id: variables.userId,
         name: variables.name,
         email: variables.email,
@@ -31,10 +33,13 @@ export default function useUpdateUserOptimistic() {
         return user;
       });
 
-      queryClient.setQueryData(["users", filter], optimisticUsers);
+      queryClient.setQueryData(
+        usersOptions({ filter }).queryKey,
+        optimisticUsers,
+      );
 
       const rollbackFn = () =>
-        queryClient.setQueryData(["users", filter], prevUsers);
+        queryClient.setQueryData(usersOptions({ filter }).queryKey, prevUsers);
 
       return { prevUser, rollbackFn };
     },
@@ -50,7 +55,7 @@ export default function useUpdateUserOptimistic() {
     },
     onSettled: () => {
       queryClient.invalidateQueries({
-        queryKey: ["users"],
+        queryKey: usersKeys.all,
       });
     },
   });

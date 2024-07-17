@@ -1,22 +1,20 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { updateUser } from "../../../services/local-storage/users";
-import { User } from "../../../types/user";
+import { usersKeys, usersOptions } from "../../../hooks/queries/useUsers";
 
 export default function useUpdateUser() {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: updateUser,
-    onMutate: (variables) => {
-      const users: User[] = queryClient.getQueryData(["users", ""]) ?? [];
+    onSuccess: (data, variables) => {
+      const users =
+        queryClient.getQueryData(usersOptions({ filter: "" }).queryKey) ?? [];
       const prevUser = users.find((user) => user.id === variables.userId);
 
-      return prevUser;
-    },
-    onSuccess: (data, _variables, context) => {
       toast.success("User updated: " + data.name, {
-        description: `Previous name: ${context.name}`,
+        description: `Previous name: ${prevUser?.name}`,
       });
     },
     onError: (error) => {
@@ -24,7 +22,7 @@ export default function useUpdateUser() {
     },
     onSettled: () => {
       return queryClient.invalidateQueries({
-        queryKey: ["users"],
+        queryKey: usersKeys.all,
       });
     },
   });

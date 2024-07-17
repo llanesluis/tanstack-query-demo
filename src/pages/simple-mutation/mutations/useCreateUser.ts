@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { createUser } from "../../../services/local-storage/users";
+import { usersKeys } from "../../../hooks/queries/useUsers";
 
 export default function useCreateUser() {
   const queryClient = useQueryClient();
@@ -15,7 +16,7 @@ export default function useCreateUser() {
     },
     onSettled: () => {
       return queryClient.invalidateQueries({
-        queryKey: ["users"],
+        queryKey: usersKeys.all,
       });
     },
   });

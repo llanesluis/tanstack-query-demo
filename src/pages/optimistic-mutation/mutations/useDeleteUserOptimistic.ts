@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useFilterContext } from "../../../hooks/useFilterContext";
 import { deleteUser } from "../../../services/local-storage/users";
-import { User } from "../../../types/user";
+import { usersKeys, usersOptions } from "../../../hooks/queries/useUsers";
 
 export default function useDeleteUserOptimistic() {
   const queryClient = useQueryClient();
@@ -14,19 +14,22 @@ export default function useDeleteUserOptimistic() {
     onMutate: async (variables) => {
       // exact: false -> cancel all query keys that PARTIALLY match the queryKey (default)
       // exact: true -> cancel all query keys that EXACTLY match the queryKey
-      await queryClient.cancelQueries({ queryKey: ["users"] });
+      await queryClient.cancelQueries({ queryKey: usersKeys.all });
 
       const prevUsers =
-        queryClient.getQueryData<User[]>(["users", filter]) ?? [];
+        queryClient.getQueryData(usersOptions({ filter }).queryKey) ?? [];
 
       const optimisticUsers = prevUsers.filter(
         (user) => user.id !== variables.userId,
       );
 
-      queryClient.setQueryData(["users", filter], optimisticUsers);
+      queryClient.setQueryData(
+        usersOptions({ filter }).queryKey,
+        optimisticUsers,
+      );
 
       const rollbackFn = () =>
-        queryClient.setQueryData(["users", filter], prevUsers);
+        queryClient.setQueryData(usersOptions({ filter }).queryKey, prevUsers);
 
       return rollbackFn;
     },
@@ -40,7 +43,7 @@ export default function useDeleteUserOptimistic() {
     },
     onSettled: () => {
       queryClient.invalidateQueries({
-        queryKey: ["users"],
+        queryKey: usersKeys.all,
       });
     },
   });

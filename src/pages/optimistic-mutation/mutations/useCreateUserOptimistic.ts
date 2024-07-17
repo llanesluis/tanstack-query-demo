@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { useFilterContext } from "../../../hooks/useFilterContext";
 import { createUser } from "../../../services/local-storage/users";
 import { User } from "../../../types/user";
+import { usersKeys, usersOptions } from "../../../hooks/queries/useUsers";
 
 export default function useCreateUserOptimistic() {
   const queryClient = useQueryClient();
@@ -14,23 +15,28 @@ export default function useCreateUserOptimistic() {
   return useMutation({
     mutationFn: createUser,
     onMutate: async (variables) => {
-      await queryClient.cancelQueries({ queryKey: ["users"] });
+      await queryClient.cancelQueries({ queryKey: usersKeys.all });
 
       const prevUsers =
-        queryClient.getQueryData<User[]>(["users", filter]) ?? [];
+        queryClient.getQueryData(usersOptions({ filter }).queryKey) ?? [];
 
-      const newUser: User = {
-        id: "optimisticly generated id... ",
-        name: variables.name,
-        email: variables.email,
-      };
+      // If the user we are creating matches the filter, we add it to the filtered list
+      if (variables.name.toLowerCase().trim().includes(filter)) {
+        const newUser: User = {
+          id: "optimisticly generated id... ",
+          name: variables.name,
+          email: variables.email,
+        };
+        const optimisticUsers = [...prevUsers, newUser];
 
-      const optimisticUsers = [...prevUsers, newUser];
-
-      queryClient.setQueryData(["users", filter], optimisticUsers);
+        queryClient.setQueryData(
+          usersOptions({ filter }).queryKey,
+          optimisticUsers,
+        );
+      }
 
       const rollbackFn = () =>
-        queryClient.setQueryData(["users", filter], prevUsers);
+        queryClient.setQueryData(usersOptions({ filter }).queryKey, prevUsers);
 
       return rollbackFn;
     },
@@ -44,7 +50,7 @@ export default function useCreateUserOptimistic() {
     },
     onSettled: () => {
       queryClient.invalidateQueries({
-        queryKey: ["users"],
+        queryKey: usersKeys.all,
       });
     },
   });
