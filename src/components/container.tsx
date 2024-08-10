@@ -5,5 +5,5 @@ interface ContainerProps {
 }
 
 export default function Container({ children }: ContainerProps) {
-  return <div className="container relative p-8">{children}</div>;
+  return <div className="container relative grow p-8">{children}</div>;
 }
