@@ -68,9 +68,15 @@ function User({
 }) {
   return (
     <div className="relative rounded-md bg-neutral-900 p-4 ring-1 ring-white/10">
-      <p className="truncate">id: {id}</p>
-      <p className="truncate">name: {name}</p>
-      <p className="truncate">email: {email}</p>
+      <p className="truncate">
+        <strong>id:</strong> {id}
+      </p>
+      <p className="truncate">
+        <strong>name:</strong> {name}
+      </p>
+      <p className="truncate">
+        <strong>email:</strong> {email}
+      </p>
       <DeleteUserButton id={id} />
       <UpdateUserButton id={id} name={name} email={email} />
     </div>

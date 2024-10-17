@@ -5,12 +5,12 @@ import { PanelLeft } from "lucide-react";
 
 export default function Navbar() {
   return (
-    <div className="sticky inset-x-0 top-0 z-10 border-b-2 bg-neutral-900 py-4">
+    <div className="sticky inset-x-0 top-0 z-10 border-b-2 bg-background/70 py-4 backdrop-blur">
       <div className="container flex items-center justify-between gap-4">
         <MobileNavbar />
         <Link
           href="/"
-          className="mr-auto inline-block bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-xl font-bold text-transparent"
+          className="text-gradient mr-auto inline-block text-xl font-bold"
         >
           TanStack Query{" "}
           <span className="align-top text-sm text-white">v5</span> demo
@@ -75,8 +75,7 @@ function NavbarItem({
       href={href}
       className={cn(
         "font-semibold",
-        pathname === href &&
-          "bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent",
+        pathname === href && "text-gradient",
         className,
       )}
     >

@@ -8,6 +8,7 @@ import Footer from "./components/footer";
 import SimpleQueryLS from "./pages/simple-query";
 import SimpleMutationLS from "./pages/simple-mutation";
 import OptimisticMutationLS from "./pages/optimistic-mutation";
+import HomePage from "./pages/home";
 
 export default function App() {
   return (
@@ -26,9 +27,7 @@ export default function App() {
 function Router() {
   return (
     <>
-      <Route path="/">
-        <h1>Tanstack Query v5 demo</h1>
-      </Route>
+      <Route path="/" component={HomePage} />
       <Route path={"/query"} component={SimpleQueryLS} />
       <Route path={"/mutation"} component={SimpleMutationLS} />
       <Route path={"/optimistic-mutation"}>
